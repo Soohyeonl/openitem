@@ -135,7 +135,7 @@ func MakeOneSubmit(req *Submit) (*Submit, error) {
 		Title:       req.Title,
 		Description: req.Description,
 		Submitter:   req.Submitter,
-		Status:      fmt.Sprintf("%s", "未通过"),
+		Status:      fmt.Sprintf("%s", "未审核"),
 		File:        req.File,
 	}
 
@@ -221,7 +221,7 @@ func SetSubmitStatus(req *SetSubmitStatusRequest) error {
 
 	_, err := adapter.engine.ID(core.PK{owner, name}).Cols("status").Update(&Submit{Status: req.NewStatus})
 	if err != nil {
-		log.Printf("delete content error: %s\n" + err.Error())
+		log.Printf("set submit status error: %s\n" + err.Error())
 		return err
 	}
 	return nil
