@@ -336,5 +336,5 @@ func getProjectStep(pid string) (string, error) {
 		"组建团队", "测试框架与论证报告", "6人访谈", "30人测试", "试题外审", "300人测试", "定稿审查",
 	}
 
-	return stepName[step.Index], nil
+	return stepName[step.StepIndex], nil
 }
