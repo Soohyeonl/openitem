@@ -97,7 +97,7 @@ type TempQuestion struct {
 	Author        string                `json:"author"`
 	IsNew         bool                  `json:"is_new"`
 	FinalBase     string                `json:"final_base"`
-	Info          QuestionInfo          `xorm:"mediumtext json" json:"info"`
+	Info          QuestionInfo          `xorm:"longtext json" json:"info"`
 	BasicProps    QuestionBasicProps    `xorm:"mediumtext json" json:"basic_props"`
 	SpecProps     QuestionSpecProps     `xorm:"mediumtext json" json:"spec_props"`
 	ExtraProps    QuestionExtraProps    `xorm:"mediumtext json" json:"extra_props"`
@@ -116,7 +116,7 @@ type FinalQuestion struct {
 	SourceProject string                `json:"source_project"` // 来源项目id
 	FinalVersion  string                `json:"final_version"`  // 录入final的最后一个版本
 	Author        string                `json:"author"`
-	Info          QuestionInfo          `xorm:"mediumtext json" json:"info"`
+	Info          QuestionInfo          `xorm:"longtext json" json:"info"`
 	BasicProps    QuestionBasicProps    `xorm:"mediumtext json" json:"basic_props"`
 	SpecProps     QuestionSpecProps     `xorm:"mediumtext json" json:"spec_props"`
 	ExtraProps    QuestionExtraProps    `xorm:"mediumtext json" json:"extra_props"`
