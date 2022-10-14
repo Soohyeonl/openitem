@@ -290,27 +290,18 @@ func NextStep(req *NextStepRequest) error {
 		return err
 	}
 
-	var tempTestpapers []TempTestpaper
-	adapter.engine.Where(builder.Eq{"source_project": req.Pid}).Find(&tempTestpapers)
-
-	if len(tempTestpapers) == 0 {
-		return errors.New("项目下没有试卷")
+	var submit []Submit
+	err = adapter.engine.Where(builder.Eq{"step_id": step.Uuid}).Find(&submit)
+	if err != nil {
+		return err
 	}
 
-	for _, v := range tempTestpapers {
-		var submit []Submit
-		err := adapter.engine.Where(builder.Eq{"testpaper_id": v.Uuid}.And(builder.Eq{"step_id": step.Uuid})).Find(&submit)
-		if err != nil {
-			return err
-		}
-
-		if len(submit) == 0 {
-			return errors.New("部分试卷未提交审核")
-		}
-		for _, v := range submit {
-			if v.Status != "审核通过" {
-				return errors.New("试卷审核未全部通过")
-			}
+	if len(submit) == 0 {
+		return errors.New("未提交审核材料")
+	}
+	for _, v := range submit {
+		if v.Status != "审核通过" {
+			return errors.New("审核未全部通过")
 		}
 	}
 
